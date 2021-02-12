@@ -10,7 +10,7 @@ jobs:
     working_directory: /home/circleci/image-builder
     steps:
       - run: echo doing nothing...
-      - run: bash -v
+      - run: sh -v
       - run: id
       - run: service --status-all
       - run: echo "Circle_CI Version-2.1"
