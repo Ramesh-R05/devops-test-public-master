@@ -16,7 +16,7 @@ workflows:
           create-repo: false
           dockerfile: Dockerfile
           no-output-timeout: 20m
-          path: ../Dockerfile
+          path: ../
           repo: nonprod-test-nowsite                     
          
       
