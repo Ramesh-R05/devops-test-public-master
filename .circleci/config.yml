@@ -1,7 +1,6 @@
 # Use Circle CI Version 2.1 - Illustrate usage of Orb
 version: 2.1
-orbs:
- # aws-cli: circleci/aws-cli@1.3
+orbs: 
   aws-ecr: circleci/aws-ecr@6.15.3
   aws-ecs: circleci/aws-ecs@2.0.0
 
@@ -17,10 +16,8 @@ workflows:
           no-output-timeout: 20m
           path: ../Dockerfile          
           region: AWS_REGION_ENV_VAR_NAME
-          repo: nonprod-test-nowsite    
-          profile-name: myProfile
-          skip-when-tags-exist: true
-          tag: 'latest,myECRRepos-circleci'
+          repo: nonprod-test-nowsite                     
+         
       
 
       
