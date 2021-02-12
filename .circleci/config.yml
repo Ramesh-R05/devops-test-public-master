@@ -3,14 +3,11 @@ version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@1.3
   node: circleci/node@19.10.0
-jobs:
-  install-node:
+jobs:  
   docker:
     - image: 'cimg/base:stable'
   steps:
-    - checkout
-    - node/Install:
-        install-yarn: true
+    - checkout   
     - run: node --version
 
       
