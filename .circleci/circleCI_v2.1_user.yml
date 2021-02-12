@@ -1,0 +1,38 @@
+# Start
+# Use CircleCI - Version 2.1
+
+# Define each of the Job and its functions
+version: 2.1
+jobs:
+  build_dockerImage:
+  #  docker:
+    #  - image: dkr.ecr.ap-southeast-2.amazonaws.com/nonprod-test-nowsite
+    steps:
+      - run: echo "Circle_CI Version-2.1"
+      #- run: node --version
+      #- run: npm set @bxm:registry http://npm.digital.bauer-media.net.au
+      #- run: mkdir -p ./circleci/testresults ./circleci/codecoverage ./circleci/buildoutput
+      #- run: cd src
+      #- run: npm install
+      #- run: npm rebuild node-sass --force
+  push_dockerImage_ECR:
+    steps:
+      - run: echo "push_dockerImage_ECR"
+      #- run:
+      #- run:
+  deploy_dockerImage_ECS:
+    steps:
+      - run: echo "deploy_dockerImage_ECS"
+      #- run:
+      #- run:
+
+# Workflows - Orchestrate the job run sequence
+workflows:
+  version: 2.1
+  build_push_deploy:
+    jobs:
+      - build_dockerImage
+      - push_dockerImage_ECR
+      - deploy_dockerImage_ECS
+#
+# 317367993082.dkr.ecr.ap-southeast-2.amazonaws.com/now-site:master.5180
