@@ -1,5 +1,5 @@
 # Start
-# Use CircleCI - Version 2.1
+# Use CircleCI - Version 2
 
 # Define each of the Job and its functions
 version: 2
@@ -9,7 +9,10 @@ jobs:
       - image: busybox
     working_directory: /home/circleci/image-builder
     steps:
-      - run: echo doing nothing.
+      - run: echo doing nothing...
+      - run: bash -v
+      - run: id
+      - run: service --status-all
       - run: echo "Circle_CI Version-2.1"
       - run: echo "Push_dockerImage_ECR"
       - run: echo "Deploy_dockerImage_ECS"
