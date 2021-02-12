@@ -3,7 +3,7 @@
 
 # Define each of the Job and its functions
 version: 2
-jobs:
+#jobs:
   #build:
   #  docker:
     #  - image: dkr.ecr.ap-southeast-2.amazonaws.com/nonprod-test-nowsite
