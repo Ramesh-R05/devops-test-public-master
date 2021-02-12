@@ -11,7 +11,7 @@ jobs:
     steps:
       - run: echo doing nothing...
       - run: id
-      - run: service --status-all
+      - run: uname -a
       - run: echo "Circle_CI Version-2.1"
       - run: echo "Push_dockerImage_ECR"
       - run: echo "Deploy_dockerImage_ECS"
