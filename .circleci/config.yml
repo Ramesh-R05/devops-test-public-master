@@ -17,7 +17,9 @@ workflows:
           no-output-timeout: 20m
           path: ../Dockerfile          
           region: AWS_REGION_ENV_VAR_NAME
-          repo: nonprod-test-nowsite          
+          repo: nonprod-test-nowsite    
+          profile-name: default
+          skip-when-tags-exist: true
           tag: 'latest,myECRRepos-circleci'
       
 
