@@ -18,7 +18,7 @@ workflows:
           path: ../Dockerfile          
           region: AWS_REGION_ENV_VAR_NAME
           repo: nonprod-test-nowsite    
-          profile-name: default
+          profile-name: myProfile
           skip-when-tags-exist: true
           tag: 'latest,myECRRepos-circleci'
       
