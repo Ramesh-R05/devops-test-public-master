@@ -8,6 +8,7 @@ jobs:
     docker:
       - image: busybox
     working_directory: /home/circleci/image-builder
+    steps:
       - run: echo doing nothing.
       - run: echo "Circle_CI Version-2.1"
       - run: echo "Push_dockerImage_ECR"
