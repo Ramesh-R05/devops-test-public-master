@@ -8,19 +8,12 @@ jobs:
     docker:
       - image: busybox
     working_directory: /home/circleci/image-builder
-    steps:
-      - run: echo doing nothing.
-      
-steps:
-  - run:
-      name: "Circle_CI Version-2.1"
-      command: echo "Circle_CI Version-2.1"
-  - run:
-      name: Push Docker
-      command: echo "Push_dockerImage_ECR"
-  - run:
-      name: Deploy Docker
-      command: echo "Deploy_dockerImage_ECS"
+    
+  steps:
+    - run: echo doing nothing.
+    - run: echo "Circle_CI Version-2.1"
+    - run: echo "Push_dockerImage_ECR"
+    - run: echo "Deploy_dockerImage_ECS"
 
 
 # Workflows - Orchestrate the job run sequence
