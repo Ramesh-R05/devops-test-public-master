@@ -5,9 +5,12 @@ orbs:
   node: circleci/node@19.10.0
 jobs:  
   docker:
-    - image: 'cimg/base:stable'
-  steps:
-    - checkout   
+    - image: centos
+  steps:   
     - run: node --version
+  machine:
+    - docker_layer_caching: true
+  steps:
+    - run: id; uname -a;
 
       
