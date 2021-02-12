@@ -8,14 +8,14 @@ workflows:
   build-and-deploy-docker-image:
     jobs:
       - aws-ecr/build-and-push-image:
-          account-url: AWS_ECR_ACCOUNT_URL_ENV_VAR_NAME
-          aws-access-key-id: ACCESS_KEY_ID_ENV_VAR_NAME
-          aws-secret-access-key: SECRET_ACCESS_KEY_ENV_VAR_NAME          
+          account-url: AWS_ECR_ACCOUNT_URL
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY          
+          region: AWS_DEFAULT_REGION
           create-repo: false
           dockerfile: Dockerfile
           no-output-timeout: 20m
-          path: ../Dockerfile          
-          region: AWS_REGION_ENV_VAR_NAME
+          path: ../Dockerfile
           repo: nonprod-test-nowsite                     
          
       
