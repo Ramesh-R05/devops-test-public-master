@@ -15,8 +15,7 @@ workflows:
           region: AWS_DEFAULT_REGION
           create-repo: false
           dockerfile: Dockerfile
-          no-output-timeout: 20m
-          path: ./dockerfile
+          no-output-timeout: 20m          
           repo: nonprod-test-nowsite                     
          
       
