@@ -8,7 +8,7 @@ jobs:
     docker:
       - image: centos
     steps:   
-      - run: node --version
+      - run: echo "contains only aws-cli"
       - run: id; uname -a;
 
       
