@@ -15,8 +15,7 @@ workflows:
           create-repo: false
           dockerfile: Dockerfile
           no-output-timeout: 20m
-          path: ../Dockerfile
-          profile-name: circle_ci
+          path: ../Dockerfile          
           region: AWS_REGION_ENV_VAR_NAME
           repo: nonprod-test-nowsite
           skip-when-tags-exist: false
