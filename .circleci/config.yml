@@ -3,10 +3,14 @@
 
 # Define each of the Job and its functions
 version: 2
-#jobs:
-  #build:
-  #  docker:
-    #  - image: dkr.ecr.ap-southeast-2.amazonaws.com/nonprod-test-nowsite
+jobs:
+  build:
+    docker:
+      - image: busybox
+    working_directory: /home/circleci/image-builder
+    steps:
+      - run: echo doing nothing.
+      
 steps:
   - run:
       name: "Circle_CI Version-2.1"
