@@ -11,9 +11,9 @@ jobs:
     machine: 
       - image: centos
     steps:
-      -run: echo "this is test1"
-      -run: env
-      -run: uname -a
+      - run: echo "this is test1"
+      - run: env
+      - run: uname -a
 
 workflows:
   build-and-deploy-docker-image:
