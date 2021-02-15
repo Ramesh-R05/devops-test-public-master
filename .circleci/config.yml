@@ -15,7 +15,7 @@ workflows:
           profile-name: bm-dig
           region: AWS_DEFAULT_REGION          
           repo: nonprod-test-nowsite-1                  
-          create-repo: true
+          create-repo: false
           dockerfile: Dockerfile
           no-output-timeout: 20m
           skip-when-tags-exist: false
