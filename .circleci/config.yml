@@ -5,16 +5,14 @@ orbs:
   aws-ecs: circleci/aws-ecs@2.0.0
   
 Jobs:
-  steps:
-    RunAdHocCommands:
-      -run: 
+  RunAdHocCommands:
+    steps:   
+      - run: 
         name: linux commands
         command: env  
 
 workflows:
-  build-and-deploy-docker-image:
-    requires:
-      - RunAdHocCommands
+  build-and-deploy-docker-image:   
     jobs:
       - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL
@@ -28,6 +26,8 @@ workflows:
           no-output-timeout: 20m
           skip-when-tags-exist: false
           tag: 'latest,myECRRepoTag'
+          requires:
+            - RunAdHocCommands
           
          
       
