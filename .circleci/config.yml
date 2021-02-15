@@ -6,12 +6,13 @@ orbs:
   
 Jobs:
   RunAdHocCommands:
-    steps:   
+    steps: 
       - run: 
-        name: linux commands
-        command: env  
+          name: linux commands
+          command: env  
 
 workflows:
+  version: 2
   build-and-deploy-docker-image:   
     jobs:
       - aws-ecr/build-and-push-image:
