@@ -6,6 +6,7 @@ orbs:
   
 jobs:
   run-adhoc-commands:
+    machine:
     steps: 
       - run: echo "this is a echo job"
       - run: 
