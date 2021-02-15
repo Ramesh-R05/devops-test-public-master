@@ -9,7 +9,7 @@ orbs:
 jobs:
   job-name1:
     machine: 
-      - image: centos
+      - image: ubuntu-2004:202101-01
     steps:
       - run: echo "this is test1"
       - run: env
