@@ -4,22 +4,10 @@ orbs:
   aws-ecr: circleci/aws-ecr@6.15.3
   aws-ecs: circleci/aws-ecs@2.0.0
 
-# Workflow version must be v2.0
-workflows:   
-  version: 2  
+workflows:
   build-and-deploy-docker-image:
-    
     jobs:
-      - run-adhoc-commands:
-          machine:
-          image: ubuntu-1604:202007-01
-      steps: 
-          - run: echo "this is a echo job"
-          - run: 
-              name: linux commands
-              command: env 
-              
-      - aws-ecr/build-and-push-image:          
+      - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
@@ -31,5 +19,5 @@ workflows:
           no-output-timeout: 20m
           skip-when-tags-exist: false
           tag: 'latest,myECRRepoTag'      
-          requires:
-            - run-adhoc-commands    
+          
+          
