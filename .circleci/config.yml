@@ -4,15 +4,14 @@ orbs:
   aws-ecr: circleci/aws-ecr@6.15.3
   aws-ecs: circleci/aws-ecs@2.0.0
   
-Jobs:
+Commands:
   RunAdHocCommands:
     steps: 
       - run: 
           name: linux commands
           command: env  
 
-workflows:
-  version: 2
+workflows:  
   build-and-deploy-docker-image:   
     jobs:
       - aws-ecr/build-and-push-image:
@@ -27,8 +26,6 @@ workflows:
           no-output-timeout: 20m
           skip-when-tags-exist: false
           tag: 'latest,myECRRepoTag'
-          requires:
-            - RunAdHocCommands
           
          
       
