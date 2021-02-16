@@ -35,8 +35,7 @@ jobs:
       - run: cat creds.txt
       - run: grep -i "AccessKeyId" creds.txt 
       - run: grep -i "SecretAccessKey" creds.txt
-      - run: grep -i "SessionToken" creds.txt
-      
+      - run: grep -i "SessionToken" creds.txt      
       #- run: export 
       #- run: aws ecr describe-repositories 
       - run: env
