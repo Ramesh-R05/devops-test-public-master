@@ -39,6 +39,7 @@ jobs:
       - run: cat creds.txt
       - run: sed 's/:/=/g' creds.txt >> creds.txt
       - run: sed 's/"//g' creds.txt >> creds.txt
+      - run: cat creds.txt
       #- run: export 
       #- run: aws ecr describe-repositories 
       - run: env
