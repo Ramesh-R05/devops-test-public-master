@@ -37,9 +37,9 @@ jobs:
       - run: grep -i "SecretAccessKey" temp_creds.txt >> creds.txt
       - run: grep -i "SessionToken" temp_creds.txt >> creds.txt     
       - run: cat creds.txt
-      - run: sed 's/:/=/g' creds.txt >> creds.txt
-      - run: sed 's/"//g' creds.txt >> creds.txt
-      - run: cat creds.txt
+      - run: sed 's/:/=/g' creds.txt > creds1.txt
+      - run: sed 's/"//g' creds1.txt > creds2.txt
+      - run: cat creds2.txt
       #- run: export 
       #- run: aws ecr describe-repositories 
       - run: env
