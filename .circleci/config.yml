@@ -30,12 +30,13 @@ jobs:
       - run: echo "this is test1"
       - run: pwd;id
       - run: uname -a
-      - run: aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access >> creds.txt
+      - run: aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access >> temp_creds.txt
       - run: pwd; ls -ltr
+      - run: cat temp_creds.txt
+      - run: grep -i "AccessKeyId" temp_creds.txt >> creds.txt
+      - run: grep -i "SecretAccessKey" temp_creds.txt >> creds.txt
+      - run: grep -i "SessionToken" temp_creds.txt >> creds.txt     
       - run: cat creds.txt
-      - run: grep -i "AccessKeyId" creds.txt 
-      - run: grep -i "SecretAccessKey" creds.txt
-      - run: grep -i "SessionToken" creds.txt      
       #- run: export 
       #- run: aws ecr describe-repositories 
       - run: env
