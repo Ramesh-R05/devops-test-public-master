@@ -1,0 +1,44 @@
+# Use Circle CI Version 2.1 - Illustrate usage of Orb
+version: 2.1
+
+# Start - 
+orbs:   
+  aws-ecr: circleci/aws-ecr@6.15.3
+  aws-ecs: circleci/aws-ecs@2.0.0
+
+workflows:
+  build-and-deploy-docker-image:
+    jobs:
+      - job-name1
+      #- aws-ecr/build-and-push-image:
+      #    account-url: AWS_ECR_ACCOUNT_URL
+      #    aws-access-key-id: AWS_ACCESS_KEY_ID
+      #    aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+      #    profile-name: bm-super
+      #    region: AWS_DEFAULT_REGION          
+      #    repo: nonprod-test-nowsite-1                  
+      #    create-repo: false
+      #    dockerfile: Dockerfile
+      #    no-output-timeout: 20m
+      #    skip-when-tags-exist: false
+      #    tag: 'latest,myECRRepoTag'
+jobs:
+  job-name1:
+    machine: 
+      image: ubuntu-2004:202101-01
+    steps:
+      - run: echo "this is test1"
+      - run: pwd;id
+      - run: uname -a
+      - run: aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access >> creds.txt
+      - run: pwd; ls -ltr
+      - run: cat creds.txt
+      - run: grep -i "AccessKeyId" creds.txt 
+      - run: grep -i "SecretAccessKey" creds.txt
+      - run: grep -i "SessionToken" creds.txt
+      
+      #- run: export 
+      #- run: aws ecr describe-repositories 
+      - run: env
+    
+    # End
