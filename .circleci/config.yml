@@ -3,6 +3,7 @@ version: 2.1
 
 # Start - 
 orbs: 
+  aws-assume-role: holdaraffle/aws-assume-role@0.0.10
   aws-ecr: circleci/aws-ecr@6.15.3
   aws-ecs: circleci/aws-ecs@2.0.0
 
