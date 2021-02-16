@@ -2,8 +2,7 @@
 version: 2.1
 
 # Start - 
-orbs: 
-  aws-assume-role: holdaraffle/aws-assume-role@0.0.10
+orbs:   
   aws-ecr: circleci/aws-ecr@6.15.3
   aws-ecs: circleci/aws-ecs@2.0.0
 
@@ -31,5 +30,6 @@ jobs:
       - run: echo "this is test1"
       - run: env
       - run: uname -a
+      - run: aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access
     
     # End
