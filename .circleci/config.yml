@@ -28,22 +28,12 @@ jobs:
       image: ubuntu-2004:202101-01
     steps:
       - run: echo "this is test1"
-      - run: pwd;id
-      - run: uname -a
-      - run: aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access >> temp_creds.txt
       - run: pwd; ls -ltr
-      - run: cat temp_creds.txt
-      - run: grep -i "AccessKeyId" temp_creds.txt >> creds.txt
-      - run: grep -i "SecretAccessKey" temp_creds.txt >> creds.txt
-      - run: grep -i "SessionToken" temp_creds.txt >> creds.txt     
-      - run: cat creds.txt
-      - run: sed 's/:/=/g' creds.txt > creds1.txt
-      - run: sed 's/"//g' creds1.txt > creds2.txt
-      - run: sed 's/,//g' creds2.txt > creds3.txt
-      - run: sed 's/ //g' creds3.txt > creds4.txt
-      - run: cat creds4.txt
-      #- run: export 
-      #- run: aws ecr describe-repositories 
-      - run: env
+      - run: uname -a      
+      # AssumeRole - ASR
+      - run: ASR=$"(aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access --output text)"
+      - run: echo $ASR
+      - run: pwd; ls -ltr; id
+      
     
     # End
