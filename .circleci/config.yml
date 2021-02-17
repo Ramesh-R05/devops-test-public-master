@@ -20,7 +20,7 @@ jobs:
       - run: uname -a      
       - run: aws --version --output text
       # AssumeRole - ASR
-      - run: ASR="$(aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access --output text)"
+      - run: ASR="$(aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-accessx1 --output text)"
       - run: echo $ASR
       - run: pwd; ls -ltr; id
       
