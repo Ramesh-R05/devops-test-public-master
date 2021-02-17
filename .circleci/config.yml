@@ -9,19 +9,7 @@ orbs:
 workflows:
   build-and-deploy-docker-image:
     jobs:
-      - job-name1
-      #- aws-ecr/build-and-push-image:
-      #    account-url: AWS_ECR_ACCOUNT_URL
-      #    aws-access-key-id: AWS_ACCESS_KEY_ID
-      #    aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-      #    profile-name: bm-super
-      #    region: AWS_DEFAULT_REGION          
-      #    repo: nonprod-test-nowsite-1                  
-      #    create-repo: false
-      #    dockerfile: Dockerfile
-      #    no-output-timeout: 20m
-      #    skip-when-tags-exist: false
-      #    tag: 'latest,myECRRepoTag'
+      - job-name1 
 jobs:
   job-name1:
     machine: 
@@ -31,7 +19,7 @@ jobs:
       - run: pwd; ls -ltr
       - run: uname -a      
       # AssumeRole - ASR
-      - run: ASR=$"(aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access --output text)"
+      - run: ASR="$(aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access --output text)"
       - run: echo $ASR
       - run: pwd; ls -ltr; id
       
