@@ -38,7 +38,7 @@ jobs:
       # AssumeRole - ASR
       - run: aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access-x1 --output text > test
       - run: cat test
-      - run: awk '{print $1 "\t" $2 "\t" $3 "\t" "$4"}' test
+      - run: awk '{print $1 "\t" $2 "\t" $4 "\t" $5}' test
       #- run: ASR=$(cat test)
       #- run: echo "$ASR"
       - run: pwd; ls -ltr; id
@@ -46,7 +46,7 @@ jobs:
     machine: 
       image:
     steps:
-       - run: echo "This is Job-Job-Name1"
+       - run: echo "This is Job-Job-Name2"
       
   
       
