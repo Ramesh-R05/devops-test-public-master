@@ -41,13 +41,8 @@ jobs:
       - run: awk 'NR==2 {print $1 "\t" $2 "\t" $4 "\t" $5}' test
       - run: awk_access_key=$(awk 'NR==2 {print $2}' test)
       - run: awk_secret_id=$(awk 'NR==2 {print $3}' test)       
-      #- run: export access_key=$awk_access_key
-      #- run: export secret_id=$awk_secret_id
-      - run:
-        name: Set Environment Variable
-        environment: 
-          access_key: "$(awk_access_key)"
-          secret_id: "$(awk_secret_id)"
+      - run: export access_key=$awk_access_key >> $BASH_ENV
+      - run: export secret_id=$awk_secret_id  >> $BASH_ENV
       - run: env
       - run: pwd; ls -ltr; id
       
