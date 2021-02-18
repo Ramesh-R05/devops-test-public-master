@@ -38,11 +38,14 @@ jobs:
       - run: pwd
       - run: 
           name: print env var from bash
-          command: echo ${assumerole_access_key}          
+          command: echo ${assumerole_access_key}
       - aws-ecr/build-and-push-image:
+          environment: 
+            AWS_ACCESS_KEY_ID: ${assumerole_access_key}
+            AWS_SECRET_ACCESS_KEY: ${assumerole_secret_id}  
           account-url: AWS_ECR_ACCOUNT_URL
-          #aws-access-key-id: AWS_ACCESS_KEY_ID
-          #aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           profile-name: bm-super
           region: AWS_DEFAULT_REGION          
           repo: nonprod-test-nowsite-1                  
