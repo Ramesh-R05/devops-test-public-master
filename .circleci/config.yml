@@ -11,6 +11,7 @@ workflows:
   build-and-deploy-docker-image:
     jobs:
       - job-name1 
+      - job-name2
       - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: AWS_ACCESS_KEY_ID
@@ -42,6 +43,7 @@ jobs:
       - run: pwd; ls -ltr; id
   job-name2:
     machine: 
+      image:
     steps:
        - run: echo "This is Job-Job-Name1"
       
