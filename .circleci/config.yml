@@ -18,23 +18,21 @@ jobs:
     machine: 
       image: ubuntu-2004:202101-01
     steps:
-      - run: echo "This is Job-Job-Name1"
-      - run: pwd; ls -ltr; 
+      - run: echo "This is Job-Job-Name1"      
       - run: uname -a      
       - run: aws --version --output text
       # AssumeRole - ASR
       - run: aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access-x1 --output text > /tmp/test
-      - run: cat /tmp/test
-      - run: awk 'NR==2 {print $1 "\t" $2 "\t" $4 "\t" $5}' /tmp/test
+      - run: cat /tmp/test      
       - run: awk 'NR==2 {print $2}' /tmp/test >>  /tmp/t1
-      - run: awk 'NR==2 {print $3}' /tmp/test >>  /tmp/t2
-      - run: 
+      - run: awk 'NR==2 {print $4}' /tmp/test >>  /tmp/t2      
           name: Set ENV Variable
           command: |
+            ls -ltr /tmp/
             echo 'export assumerole_access_key=$(cat /tmp/t1)' >> $BASH_ENV
             echo 'export assumerole_secret_id=$(cat /tmp/t2)'  >> $BASH_ENV
             source $BASH_ENV
-            echo "Set ENV VAR"
+            echo "ENV VAR SET"
       - run: env | grep -i assume*
       - run: pwd
       
