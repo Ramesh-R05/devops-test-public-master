@@ -16,7 +16,7 @@ jobs:
       image: ubuntu-2004:202101-01
     steps:
       - run: echo "this is test1"
-      - run: pwd; ls -ltr
+      - run: pwd; ls -ltr; bash -v
       - run: uname -a      
       - run: aws --version --output text
       # AssumeRole - ASR
