@@ -26,16 +26,14 @@ jobs:
       - run: aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access-x1 --output text > /tmp/test
       - run: cat /tmp/test
       - run: awk 'NR==2 {print $1 "\t" $2 "\t" $4 "\t" $5}' /tmp/test
-      - run: awk_access_key="$(awk 'NR==2 {print $2}' /tmp/test)"; echo $(awk_access_key)
-      - run: awk_secret_id="$(awk 'NR==2 {print $3}' /tmp/test)"; echo $(awk_secret_id)  
+      - run: awk 'NR==2 {print $2}' /tmp/test >>  /tmp/t1
+      - run: awk 'NR==2 {print $3}' /tmp/test >>  /tmp/t2
       - run: 
           name: Set ENV Variable
           command: |
-            #aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access-x1 --output text > test
-            #cat test; pwd; awk_access_key=$(awk 'NR==2 {print $2}' ./test); awk_access_key=$(awk 'NR==2 {print $3}' ./test)          
-            #echo 'export assumerole_access_key=$(awk 'NR==2 {print $2}' test)' >> $BASH_ENV
-            #echo 'export assumerole_secret_id=$(awk 'NR==2 {print $3}' test)'  >> $BASH_ENV
-            #source $BASH_ENV
+            echo 'export assumerole_access_key=$(cat /tmp/t1)' >> $BASH_ENV
+            echo 'export assumerole_secret_id=$(cat /tmp/t2)'  >> $BASH_ENV
+            source $BASH_ENV
             echo "Set ENV VAR"
       - run: env | grep -i assume*
       - run: pwd
