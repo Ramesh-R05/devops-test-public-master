@@ -14,8 +14,8 @@ workflows:
       - job-name2
       - aws-ecr/build-and-push-image:
          account-url: AWS_ECR_ACCOUNT_URL
-         aws-access-key-id: $assumerole_access_key
-         aws-secret-access-key: $assumerole_secret_id
+         aws-access-key-id: ${assumerole_access_key}
+         aws-secret-access-key: ${assumerole_secret_id}
          profile-name: bm-super
          region: AWS_DEFAULT_REGION          
          repo: nonprod-test-nowsite-1                  
