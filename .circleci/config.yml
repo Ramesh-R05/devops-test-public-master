@@ -38,8 +38,7 @@ jobs:
       - run: pwd
       - run: 
           name: print env var from bash
-          command: echo ${assumerole_access_key}
-          command: echo ${assumerole_secret_id}
+          command: echo ${assumerole_access_key}          
       - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: ${assumerole_access_key}
