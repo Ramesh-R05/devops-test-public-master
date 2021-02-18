@@ -11,7 +11,7 @@ workflows:
   build-and-deploy-docker-image:
     jobs:
       - job-name1 
-      #- job-name2          
+      - job-name2          
 
 jobs:  
   job-name1:
