@@ -39,10 +39,10 @@ jobs:
       - run: aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access-x1 --output text > test
       - run: cat test
       - run: awk 'NR==2 {print $1 "\t" $2 "\t" $4 "\t" $5}' test
-      - run: awk_access_key=$(awk 'NR==2 {print $2}' test)
-      - run: awk_secret_id=$(awk 'NR==2 {print $3}' test)       
-      - run: echo 'export assumerole_access_key=$(awk_access_key)' >> $BASH_ENV
-      - run: echo 'export assumerole_secret_id=$(awk_secret_id)'  >> $BASH_ENV
+      #- run: awk_access_key=$(awk 'NR==2 {print $2}' test)
+      #- run: awk_secret_id=$(awk 'NR==2 {print $3}' test)       
+      - run: echo 'export assumerole_access_key=$(awk 'NR==2 {print $2}' test)' >> $BASH_ENV
+      - run: echo 'export assumerole_secret_id=$(awk 'NR==2 {print $3}' test)'  >> $BASH_ENV
       - run: source $BASH_ENV
       - run: env | grep -i assume*
       - run: pwd; ls -ltr; id
