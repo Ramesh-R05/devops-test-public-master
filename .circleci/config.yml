@@ -24,7 +24,7 @@ jobs:
       - run: aws --version --output text
       # AssumeRole - ASR
       - run: aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access-x1 --output text > /tmp/test
-      - run: cat test
+      - run: cat /tmp/test
       - run: awk 'NR==2 {print $1 "\t" $2 "\t" $4 "\t" $5}' /tmp/test
       - run: awk_access_key=$(awk 'NR==2 {print $2}' /tmp/test); echo $(awk_access_key)
       - run: awk_secret_id=$(awk 'NR==2 {print $3}' /tmp/test); echo $(awk_secret_id)  
