@@ -22,7 +22,7 @@ jobs:
       # AssumeRole - ASR
       #- run: ASR="$(aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-accessx1 --output text)" 
       #- run: aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access-x1 --output text
-      - run: ASR=$(aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access-x1 --output text)
+      - run: ASR="$(aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access-x1 --output text 2>&1)"
       - run: echo $ASR
       - run: pwd; ls -ltr; id
       
