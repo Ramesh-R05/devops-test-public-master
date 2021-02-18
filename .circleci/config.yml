@@ -36,6 +36,10 @@ jobs:
             echo "ENV VAR SET"
       - run: env | grep -i assume*
       - run: pwd
+      - run: 
+          name: print env var from bash
+          command: echo ${assumerole_access_key}
+          command: echo ${assumerole_secret_id}
       - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: ${assumerole_access_key}
