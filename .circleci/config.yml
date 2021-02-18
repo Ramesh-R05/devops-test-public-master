@@ -55,9 +55,9 @@ jobs:
       
   job-name2:
     machine: 
-      image:
+      image: ubuntu-2004:202101-01
     steps:
-       - run: echo "This is Job-Job-Name2"
+       - run: echo "This is Job-Name2"
        - run: env | grep -i assume*
       
   
