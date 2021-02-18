@@ -26,6 +26,7 @@ jobs:
       - run: cat /tmp/test      
       - run: awk 'NR==2 {print $2}' /tmp/test >>  /tmp/t1
       - run: awk 'NR==2 {print $4}' /tmp/test >>  /tmp/t2      
+      - run:
           name: Set ENV Variable
           command: |
             ls -ltr /tmp/
