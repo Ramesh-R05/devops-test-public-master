@@ -6,16 +6,31 @@ orbs:
   aws-ecr: circleci/aws-ecr@6.15.3
   aws-ecs: circleci/aws-ecs@2.0.0
 
+
 workflows:
   build-and-deploy-docker-image:
     jobs:
       - job-name1 
-jobs:
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ECR_ACCOUNT_URL
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          profile-name: bm-super
+          region: AWS_DEFAULT_REGION          
+          repo: nonprod-test-nowsite-1                  
+          create-repo: false
+          dockerfile: Dockerfile
+          no-output-timeout: 20m
+          skip-when-tags-exist: false
+          tag: 'latest,myECRRepoTag'
+          
+
+jobs:  
   job-name1:
     machine: 
       image: ubuntu-2004:202101-01
     steps:
-      - run: echo "this is test1"
+      - run: echo "This is Job-Job-Name1"
       - run: pwd; ls -ltr; 
       - run: uname -a      
       - run: aws --version --output text
@@ -25,6 +40,12 @@ jobs:
       #- run: ASR=$(cat test)
       #- run: echo "$ASR"
       - run: pwd; ls -ltr; id
+  job-name2:
+    machine: 
+    steps:
+       - run: echo "This is Job-Job-Name1"
+      
+  
       
     
     # End
