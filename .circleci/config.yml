@@ -58,7 +58,7 @@ jobs:
       image: ubuntu-2004:202101-01
     steps:
        - run: echo "This is Job-Name2"
-       - run: env | grep -i assume*
+       - run: env
       
   
       
