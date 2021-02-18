@@ -43,7 +43,7 @@ jobs:
       - run: awk_secret_id=$(awk 'NR==2 {print $3}' test)       
       - run: export access_key=$awk_access_key
       - run: export secret_id=$awk_secret_id
-      - run: set
+      - run: env
       - run: pwd; ls -ltr; id
       
       
