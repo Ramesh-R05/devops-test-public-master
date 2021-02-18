@@ -46,8 +46,8 @@ jobs:
       - run:
         name: Set Environment Variable
         environment: 
-          access_key: $awk_access_key
-          secret_id: $awk_secret_id
+          access_key: "$(awk_access_key)"
+          secret_id: "$(awk_secret_id)"
       - run: env
       - run: pwd; ls -ltr; id
       
