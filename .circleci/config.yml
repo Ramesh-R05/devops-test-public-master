@@ -45,9 +45,9 @@ jobs:
           name: Set ENV Variable
           command: |
             aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access-x1 --output text > test
-            cat test          
-            echo 'export assumerole_access_key=$(awk 'NR==2 {print $2}' test)' >> $BASH_ENV
-            echo 'export assumerole_secret_id=$(awk 'NR==2 {print $3}' test)'  >> $BASH_ENV
+            cat test; pwd; awk_access_key=$(awk 'NR==2 {print $2}' test); awk_access_key=$(awk 'NR==2 {print $3}' test)          
+            #echo 'export assumerole_access_key=$(awk 'NR==2 {print $2}' test)' >> $BASH_ENV
+            #echo 'export assumerole_secret_id=$(awk 'NR==2 {print $3}' test)'  >> $BASH_ENV
             source $BASH_ENV
       - run: env | grep -i assume*
       - run: pwd
