@@ -58,6 +58,7 @@ jobs:
       image:
     steps:
        - run: echo "This is Job-Job-Name2"
+       - run: env | grep -i assume*
       
   
       
