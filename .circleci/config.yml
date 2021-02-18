@@ -11,20 +11,7 @@ workflows:
   build-and-deploy-docker-image:
     jobs:
       - job-name1 
-      #- job-name2
-      - aws-ecr/build-and-push-image:
-          account-url: AWS_ECR_ACCOUNT_URL
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          profile-name: bm-super
-          region: AWS_DEFAULT_REGION          
-          repo: nonprod-test-nowsite-1                  
-          create-repo: false
-          dockerfile: Dockerfile
-          no-output-timeout: 20m
-          skip-when-tags-exist: false
-          tag: 'latest,myECRRepoTag'
-          
+      #- job-name2          
 
 jobs:  
   job-name1:
@@ -36,19 +23,20 @@ jobs:
       - run: uname -a      
       - run: aws --version --output text
       # AssumeRole - ASR
-      #- run: aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access-x1 --output text > test
-      #- run: cat test
-      #- run: awk 'NR==2 {print $1 "\t" $2 "\t" $4 "\t" $5}' test
-      #- run: awk_access_key=$(awk 'NR==2 {print $2}' test)
-      #- run: awk_secret_id=$(awk 'NR==2 {print $3}' test)       
+      - run: aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access-x1 --output text > test
+      - run: cat test
+      - run: awk 'NR==2 {print $1 "\t" $2 "\t" $4 "\t" $5}' test
+      - run: awk_access_key=$(awk 'NR==2 {print $2}' test); echo $(awk_access_key)
+      - run: awk_secret_id=$(awk 'NR==2 {print $3}' test); echo $(awk_secret_id)  
       - run: 
           name: Set ENV Variable
           command: |
-            aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access-x1 --output text > test
-            cat test; pwd; awk_access_key=$(awk 'NR==2 {print $2}' ./test); awk_access_key=$(awk 'NR==2 {print $3}' ./test)          
+            #aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access-x1 --output text > test
+            #cat test; pwd; awk_access_key=$(awk 'NR==2 {print $2}' ./test); awk_access_key=$(awk 'NR==2 {print $3}' ./test)          
             #echo 'export assumerole_access_key=$(awk 'NR==2 {print $2}' test)' >> $BASH_ENV
             #echo 'export assumerole_secret_id=$(awk 'NR==2 {print $3}' test)'  >> $BASH_ENV
-            source $BASH_ENV
+            #source $BASH_ENV
+            echo "Set ENV VAR"
       - run: env | grep -i assume*
       - run: pwd
       
