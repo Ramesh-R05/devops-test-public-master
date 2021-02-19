@@ -17,6 +17,9 @@ jobs:
   job-name1:
     machine: 
       image: ubuntu-2004:202101-01
+    environment: 
+      AWS_ACCESS_KEY_ID_1: ${assumerole_access_key}
+      AWS_SECRET_ACCESS_KEY_1: ${assumerole_secret_id}  
     steps:
       - run: echo "This is Job-Job-Name1"      
       - run: uname -a      
@@ -38,14 +41,11 @@ jobs:
       - run: pwd
       - run: 
           name: print env var from bash
-          command: echo ${assumerole_access_key}
-      - aws-ecr/build-and-push-image:
-          environment: 
-            AWS_ACCESS_KEY_ID: ${assumerole_access_key}
-            AWS_SECRET_ACCESS_KEY: ${assumerole_secret_id}  
+          command: echo ${assumerole_access_key}          
+      - aws-ecr/build-and-push-image: 
           account-url: AWS_ECR_ACCOUNT_URL
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          aws-access-key-id: AWS_ACCESS_KEY_ID_1
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY_1
           profile-name: bm-super
           region: AWS_DEFAULT_REGION          
           repo: nonprod-test-nowsite-1                  
