@@ -14,7 +14,7 @@ workflows:
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          profile-name: bm-super
+          profile-name: profile1
           region: AWS_DEFAULT_REGION          
           repo: nonprod-test-nowsite-1                  
           create-repo: false
