@@ -19,8 +19,7 @@ workflows:
           profile-name: profile1
           region: AWS_DEFAULT_REGION          
           repo: nonprod-test-nowsite-1                            
-          create-repo: true
-          repo-scan-on-push: true
+          create-repo: true          
           dockerfile: Dockerfile
           no-output-timeout: 20m
           skip-when-tags-exist: true
