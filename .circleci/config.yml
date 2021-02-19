@@ -19,6 +19,7 @@ workflows:
           profile-name: profile1
           region: AWS_DEFAULT_REGION          
           repo: nonprod-test-nowsite-1                  
+          repo-scan-on-push: false
           create-repo: false
           dockerfile: Dockerfile
           no-output-timeout: 20m
@@ -27,10 +28,11 @@ workflows:
           #requires:
           #  - job-name1
             
-      - aws-ecs/deploy-service-update:
-          cluster-name: circleci-testCluster
-          container-image-name-updates: 'container=circleci-service,tag=${CIRCLE_SHA1}'
-          family: 'circleci-service'
+      - aws-ecs/run-task:
+          cluster: circleci-testCluster
+          security-group-ids: $SECURITY_GROUP_IDS
+          subnet-ids: 'subnet-04c1bf5fd3762b6e9, subnet-084693ed843958386'
+          task-definition: myapp
           requires:
           - aws-ecr/build-and-push-image
             
