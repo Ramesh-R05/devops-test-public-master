@@ -10,6 +10,10 @@ workflows:
   build-and-deploy-docker-image:
     jobs:
       - job-name1
+      - slack/notify:
+          channel: ramesh.raj@aremedia.com.au
+          event: pass
+          template: basic_success_1
       - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: AWS_ACCESS_KEY_ID
@@ -20,22 +24,18 @@ workflows:
           create-repo: false
           dockerfile: Dockerfile
           no-output-timeout: 20m
-          skip-when-tags-exist: false
+          skip-when-tags-exist: true
           tag: 'latest,myECRRepoTag'
           requires:
             - job-name1
             
-jobs:
+jobs:  
   job-name1:
     machine: 
       image: ubuntu-2004:202101-01
     steps:
-      - run: echo "this is test1"
-      - run: pwd;id
-      - run: uname -a      
-      - run: pwd; ls -ltr
-      #- run: aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access >> creds.txt
-      #- run: aws ecr describe-repositories 
-      #- run: env
+      - run: echo "This Job Collects VM Info: Linux"
+      - run: pwd; id; uname -a;   
+    
     
     # End
