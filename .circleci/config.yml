@@ -13,11 +13,6 @@ workflows:
       
       - job-name1 # Sample JOB from the Jobs Section Below
       
-      - slack/notify: # Slack Integration
-          channel: ramesh.raj@aremedia.com.au
-          event: pass
-          template: basic_success_1
-      
       - aws-ecr/build-and-push-image: # ECR Integration - Build and Push
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: AWS_ACCESS_KEY_ID
@@ -39,7 +34,11 @@ jobs:
       image: ubuntu-2004:202101-01
     steps:
       - run: echo "This Job Collects VM Info_Linux"
-      - run: pwd; id; uname -a;   
+      - run: pwd; id; uname -a;
+      - slack/notify:
+          channel: cloudhosting-devops
+          event: pass
+          template: basic_success_1
     
     
     # End
