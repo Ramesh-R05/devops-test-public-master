@@ -36,7 +36,7 @@ jobs:
       - run: echo "This Job Collects VM Info_Linux"
       - run: pwd; id; uname -a;
       - slack/notify:
-          channel: cloudhosting-devops
+          channel: RameshR
           event: pass
           template: basic_success_1
     
