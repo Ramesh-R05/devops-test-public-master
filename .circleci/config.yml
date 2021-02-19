@@ -4,14 +4,13 @@ version: 2.1
 # Start - 
 orbs:   
   aws-ecr: circleci/aws-ecr@6.15.3
-  aws-ecs: circleci/aws-ecs@2.0.0
-  slack: circleci/slack@4.3.0
+  aws-ecs: circleci/aws-ecs@2.0.0 
 
 workflows:
   build-and-deploy-docker-image:
     jobs:
       
-      - job-name1 # Sample JOB from the Jobs Section Below
+      #- job-name1 # Sample JOB from the Jobs Section Below
       
       - aws-ecr/build-and-push-image: # ECR Integration - Build and Push
           account-url: AWS_ECR_ACCOUNT_URL
@@ -25,9 +24,17 @@ workflows:
           no-output-timeout: 20m
           skip-when-tags-exist: true
           tag: 'latest,myECRRepoTag'
-          requires:
-            - job-name1
+          #requires:
+          #  - job-name1
             
+      - aws-ecs/deploy-service-update:
+          cluster-name: circleci-testCluster
+          container-image-name-updates: 'container=circleci-service,tag=${CIRCLE_SHA1}'
+          family: 'circleci-service'
+          requires:
+          - aws-ecr/build-and-push-image
+            
+          
 jobs:  
   job-name1:
     machine: 
@@ -35,10 +42,6 @@ jobs:
     steps:
       - run: echo "This Job Collects VM Info_Linux"
       - run: pwd; id; uname -a;
-      - slack/notify:
-          channel: RameshR
-          event: pass
-          template: basic_success_1
-    
+      
     
     # End
