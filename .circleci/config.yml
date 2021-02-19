@@ -30,9 +30,10 @@ workflows:
           #subnets: subnet-b0e19cc6 / subnet-18c6837c
             
       - aws-ecs/deploy-service-update:
+          service-name: circleci-service
           family: circleci-task
-          cluster-name: circleci-testCluster
-          container-image-name-updates: "container=circleci-service,tag=${CIRCLE_SHA1}"
+          cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/circleci-testCluster
+          container-image-name-updates: "container=circleci-containername,tag=${CIRCLE_SHA1}"
           requires:
           - aws-ecr/build-and-push-image
             
