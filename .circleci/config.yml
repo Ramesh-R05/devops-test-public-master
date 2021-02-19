@@ -24,6 +24,7 @@ workflows:
           tag: 'latest,myECRRepoTag'
           requires:
             - job-name1
+            
 jobs:
   job-name1:
     machine: 
