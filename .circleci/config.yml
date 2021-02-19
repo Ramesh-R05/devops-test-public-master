@@ -32,7 +32,7 @@ workflows:
       - aws-ecs/deploy-service-update:
           family: circleci-task
           cluster-name: circleci-testCluster
-          container-image-name-updates: "container=circleci-service,tag=${CIRCLE_SHA1}"
+          container-image-name-updates: "container=circleci-containername,tag=${CIRCLE_SHA1}"
           requires:
           - aws-ecr/build-and-push-image
             
