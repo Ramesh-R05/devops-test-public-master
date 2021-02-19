@@ -38,7 +38,7 @@ jobs:
     machine: 
       image: ubuntu-2004:202101-01
     steps:
-      - run: echo "This Job Collects VM Info: Linux"
+      - run: echo "This Job Collects VM Info_Linux"
       - run: pwd; id; uname -a;   
     
     
