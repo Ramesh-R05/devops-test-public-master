@@ -18,8 +18,7 @@ workflows:
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           profile-name: profile1
           region: AWS_DEFAULT_REGION          
-          repo: nonprod-test-nowsite-1                  
-          repo-scan-on-push: false
+          repo: nonprod-test-nowsite-1                            
           create-repo: false
           dockerfile: Dockerfile
           no-output-timeout: 20m
