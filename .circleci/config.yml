@@ -22,6 +22,8 @@ workflows:
           no-output-timeout: 20m
           skip-when-tags-exist: false
           tag: 'latest,myECRRepoTag'
+          requires:
+            - job-name1
 jobs:
   job-name1:
     machine: 
@@ -29,10 +31,10 @@ jobs:
     steps:
       - run: echo "this is test1"
       - run: pwd;id
-      - run: uname -a
-      #- run: aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access >> creds.txt
+      - run: uname -a      
       - run: pwd; ls -ltr
+      #- run: aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access >> creds.txt
       #- run: aws ecr describe-repositories 
-      - run: env
+      #- run: env
     
     # End
