@@ -12,11 +12,11 @@ workflows:
       
       #- job-name1 # Sample JOB from the Jobs Section Below
       
-      - aws-ecr/build-and-push-image: # ECR Integration - Build and Push
-          account-url: AWS_ECR_ACCOUNT_URL
+      - aws-ecr/build-and-push-image: # ECR Integration - Build and Push          
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           profile-name: profile1
+          account-url: AWS_ECR_ACCOUNT_URL          
           region: AWS_DEFAULT_REGION          
           repo: nonprod-test-nowsite-1                            
           create-repo: true          
@@ -27,16 +27,20 @@ workflows:
           #requires:
           #  - job-name1
           
-          #subnets: subnet-b0e19cc6 / subnet-18c6837c
+          # Cluster_Name: cci-cluster3
+          # Service_Name: cci-service3
+          # Task_Name: cci-task1
+          # Container_Name: cci-container1
+          # Expose Port 3001
+                   
             
       - aws-ecs/deploy-service-update:
-          service-name: circleci-service
-          family: circleci-task
-          cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/circleci-testCluster
-          container-image-name-updates: "container=circleci-containername,tag=${CIRCLE_SHA1}"
+          service-name: cci-service3
+          family: cci-task1
+          cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cci-cluster3
+          container-image-name-updates: "container=cci-container1,tag=cci-tag-${CIRCLE_SHA1}"
           requires:
-          - aws-ecr/build-and-push-image
-            
+          - aws-ecr/build-and-push-image                   
           
 jobs:  
   job-name1:
