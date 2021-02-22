@@ -22,7 +22,7 @@ workflows:
           create-repo: true          
           dockerfile: Dockerfile
           no-output-timeout: 20m
-          skip-when-tags-exist: true
+          skip-when-tags-exist: false
           tag: 'latest,myECRRepoTag'
           #requires:
           #  - job-name1
