@@ -18,12 +18,12 @@ workflows:
           profile-name: profile1
           account-url: AWS_ECR_ACCOUNT_URL          
           region: AWS_DEFAULT_REGION          
-          repo: cci-repos1                            
+          repo: nonprod-test-nowsite-1                         
           create-repo: true          
           dockerfile: Dockerfile
           no-output-timeout: 20m
           skip-when-tags-exist: false
-          tag: 'latest,myECRRepoTag'
+          tag: 'latest,HelloWorldSample'
           #requires:
           #  - job-name1
           
