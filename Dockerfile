@@ -13,6 +13,6 @@ RUN echo '. /etc/apache2/envvars' > /root/run_apache.sh && \
  cat /etc/apache2/ports.conf && \
  chmod 755 /root/run_apache.sh
 
-EXPOSE 80 8081 3001
+EXPOSE 8081 3001
 
 CMD /root/run_apache.sh
