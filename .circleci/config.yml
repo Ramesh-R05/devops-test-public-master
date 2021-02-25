@@ -18,8 +18,9 @@ workflows:
           profile-name: profile1
           account-url: AWS_ECR_ACCOUNT_URL          
           region: AWS_DEFAULT_REGION          
-          repo: nonprod-test-nowsite-1                            
-          create-repo: true          
+          repo: cci-repos1                            
+          create-repo: true   
+          repo-scan-on-push: false
           dockerfile: Dockerfile
           no-output-timeout: 20m
           skip-when-tags-exist: false
