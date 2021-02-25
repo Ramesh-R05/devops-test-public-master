@@ -7,11 +7,13 @@ RUN echo '<b> Hello World ! </b>' > /var/www/html/index.html
 RUN echo '. /etc/apache2/envvars' > /root/run_apache.sh && \
  echo 'mkdir -p /var/run/apache2' >> /root/run_apache.sh && \
  echo 'mkdir -p /var/lock/apache2' >> /root/run_apache.sh && \ 
- echo '/usr/sbin/apache2 -D FOREGROUND' >> /root/run_apache.sh && \ 
- sed '/Listen 80/ a  Listen 8090' /etc/apache2/ports.conf && \ 
- cat /etc/apache2/ports.conf && \
+ echo '/usr/sbin/apache2 -D FOREGROUND' >> /root/run_apache.sh && \  
  chmod 755 /root/run_apache.sh
+ 
+RUN sed '/Listen 80/ a  Listen 8091' /etc/apache2/ports.conf
+RUN cat /etc/apache2/ports.conf
 
-EXPOSE 8090
+EXPOSE 8091
 
 CMD /root/run_apache.sh
+# END
