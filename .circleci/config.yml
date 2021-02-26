@@ -27,7 +27,7 @@ workflows:
           cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cluster-cci
           service-name: service-cci
           family: task-cci5          
-          container-image-name-updates: "container=container-cci5,tag=Port80"
+          container-image-name-updates: "container=container-cci5,tag=latest"
           requires:
           - aws-ecr/build-and-push-image                   
           
