@@ -29,7 +29,14 @@ workflows:
           family: task-cci5          
           container-image-name-updates: "container=container-cci5,tag=latest"
           requires:
-          - aws-ecr/build-and-push-image                   
+          - aws-ecr/build-and-push-image          
+          
+      - aws-ecs/update-service:
+          cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cluster-cci          
+          family: task-cci5
+          container-image-name-updates: "container=container-cci5,tag=latest"
+          requires:
+          - aws-ecs/deploy-service-update
           
 jobs:  
   job-name1:
