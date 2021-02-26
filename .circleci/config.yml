@@ -7,6 +7,7 @@ orbs:
   aws-ecs: circleci/aws-ecs@2.0.0 
 
 workflows:
+  
   build-and-deploy-docker-image:
     jobs:
     
@@ -30,25 +31,29 @@ workflows:
           container-image-name-updates: "container=container-cci5,tag=latest"
           requires:
           - aws-ecr/build-and-push-image          
-     
-     update-tag:
-        docker:
-          - image: 'cimg/python:3.9.1'
-        steps:     
-          - aws-ecs/update-service:
-              cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cluster-cci          
-              family: task-cci5
-              container-image-name-updates: "container=container-cci5,tag=latest"
-              requires:
-              - aws-ecs/deploy-service-update
-          
+    
+  deploy:
+    jobs:
+      - aws-ecs/update-service:
+          cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cluster-cci          
+          family: task-cci5
+          container-image-name-updates: "container=container-cci5,tag=latest"
+          requires:
+          - aws-ecs/deploy-service-update
+
+        
+   
 jobs:  
+  
   job-name1:
+    
     machine: 
       image: ubuntu-2004:202101-01
     steps:
       - run: echo "This Job Collects VM Info_Linux"
       - run: pwd; id; uname -a;
+      
+
       
       
           #requires:
