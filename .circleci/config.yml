@@ -35,7 +35,7 @@ workflows:
                    
             
       - aws-ecs/deploy-service-update:
-          service-name: cci-service5
+          service-name: service-cci
           family: task-cci
           cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cci-cluster5
           container-image-name-updates: "container=container-cci,tag=cci-tag-${CIRCLE_SHA1}"
