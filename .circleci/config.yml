@@ -9,9 +9,7 @@ orbs:
 workflows:
   build-and-deploy-docker-image:
     jobs:
-      
-      #- job-name1 # Sample JOB from the Jobs Section Below
-      
+    
       - aws-ecr/build-and-push-image: # ECR Integration - Build and Push          
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
@@ -23,21 +21,12 @@ workflows:
           dockerfile: Dockerfile
           no-output-timeout: 20m
           skip-when-tags-exist: false
-          tag: 'latest,Port8091'
-          #requires:
-          #  - job-name1
-          
-          # Cluster_Name: cci-cluster3
-          # Service_Name: cci-service3
-          # Task_Name: cci-task1
-          # Container_Name: cci-container1
-          # Expose Port 3001
-                   
+          tag: 'latest,Port8091'                   
             
-      - aws-ecs/deploy-service-update:
+      - aws-ecs/deploy-service-update: # ECS Integration: Cluster| Service | Task | PullImage-ECR
           service-name: service-cci
           family: task-cci
-          cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cci-cluster5
+          cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cluster-cci
           container-image-name-updates: "container=container-cci,tag=Port8091"
           requires:
           - aws-ecr/build-and-push-image                   
@@ -49,6 +38,16 @@ jobs:
     steps:
       - run: echo "This Job Collects VM Info_Linux"
       - run: pwd; id; uname -a;
+      
+      
+          #requires:
+          #  - job-name1
+          
+          # Cluster_Name: cci-cluster3
+          # Service_Name: cci-service3
+          # Task_Name: cci-task1
+          # Container_Name: cci-container1
+          # Expose Port 3001
       
     
     ### End
