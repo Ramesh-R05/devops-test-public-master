@@ -17,17 +17,17 @@ workflows:
           account-url: AWS_ECR_ACCOUNT_URL          
           region: AWS_DEFAULT_REGION          
           repo: cci-repos1                         
-          create-repo: true          
+          create-repo: false          
           dockerfile: Dockerfile
           no-output-timeout: 20m
           skip-when-tags-exist: false
           tag: 'latest,Port80'                   
             
       - aws-ecs/deploy-service-update: # ECS Integration: Cluster| Service | Task | PullImage-ECR
-          service-name: service-cci
-          family: task-cci1
           cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cluster-cci
-          container-image-name-updates: "container=container-cci,tag=Port80"
+          service-name: service-cci
+          family: task-cci5          
+          container-image-name-updates: "container=container-cci5,tag=latest"
           requires:
           - aws-ecr/build-and-push-image                   
           
