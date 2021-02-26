@@ -20,7 +20,7 @@ workflows:
           create-repo: true      
           dockerfile: Dockerfile
           no-output-timeout: 20m
-          skip-when-tags-exist: true
+          skip-when-tags-exist: false
           tag: 'latest,Port80'                   
             
       - aws-ecs/deploy-service-update: # ECS Integration: Cluster| Service | Task | PullImage-ECR
