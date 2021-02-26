@@ -17,7 +17,7 @@ workflows:
           account-url: AWS_ECR_ACCOUNT_URL          
           region: AWS_DEFAULT_REGION          
           repo: cci-repos1                         
-          create-repo: false          
+          create-repo: true      
           dockerfile: Dockerfile
           no-output-timeout: 20m
           skip-when-tags-exist: true
