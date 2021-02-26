@@ -38,7 +38,7 @@ workflows:
           service-name: service-cci
           family: task-cci
           cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cci-cluster5
-          container-image-name-updates: "container=container-cci,tag=cci-tag-${CIRCLE_SHA1}"
+          container-image-name-updates: "container=container-cci,tag=Port8091"
           requires:
           - aws-ecr/build-and-push-image                   
           
