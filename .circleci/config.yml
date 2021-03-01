@@ -29,6 +29,9 @@ workflows:
           container-image-name-updates: "container=container-cci5,tag=latest"
           force-new-deployment: true
           verify-revision-is-deployed: true
+          max-poll-attempts: 5 # no of times to check the new task deployment
+          poll-interval: 10 # in secs          
+          verification-timeout: 1 # in minutes
           requires:
             - aws-ecr/build-and-push-image
       
