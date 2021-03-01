@@ -1,81 +1,71 @@
 # Use Circle CI Version 2.1 - Illustrate usage of Orb
 version: 2.1
 
-# Start - 
-orbs:     
+# Start -
+orbs:
   aws-ecr: circleci/aws-ecr@6.15.3
-  aws-ecs: circleci/aws-ecs@2.0.0 
+  aws-ecs: circleci/aws-ecs@2.0.0
   aws-cli: circleci/aws-cli@1.4.0
 
-jobs:    
-  
-  job-name1:    
-    
-    machine: 
-      image: ubuntu-2004:202101-01
-    
-    steps:
-      - run: echo "This Job Collects VM Info_Linux"
-      - run: pwd; id; uname -a;
-
+jobs:
   build-push-docker-images:
-    
-    docker:
-     - image: 'cimg/python:3.9.1'
-    
-    steps:            
-      - aws-ecr/build-and-push-image: # ECR Integration - Build and Push          
+    steps:
+      - aws-ecr/build-and-push-image: # ECR Integration - Build and Push
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          region: AWS_DEFAULT_REGION          
+          region: AWS_DEFAULT_REGION
           profile-name: profile1
-          account-url: AWS_ECR_ACCOUNT_URL                    
-          repo: cci-repos1                         
-          create-repo: true      
+          account-url: AWS_ECR_ACCOUNT_URL
+          repo: cci-repos1
+          create-repo: true
           dockerfile: Dockerfile
           no-output-timeout: 20m
           skip-when-tags-exist: false
-          tag: 'latest,Port80'                   
-          
+          tag: 'latest,Port80'
+
       - aws-ecs/deploy-service-update: # ECS Integration: Cluster| Service | Task | PullImage-ECR
           cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cluster-cci
           service-name: service-cci
-          family: task-cci5          
+          family: task-cci5
           container-image-name-updates: "container=container-cci5,tag=latest"
           requires:
-          - aws-ecr/build-and-push-image                              
+          - aws-ecr/build-and-push-image
 
-      - aws-cli/setup:
+   update-task-on-service:
+     docker:
+       - image: 'cimg/python:3.9.1'
+     steps:
+       - aws-cli/setup:
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          aws-region: AWS_DEFAULT_REGION          
-      
+          aws-region: AWS_DEFAULT_REGION
+
       - aws-ecs/update-service:
-          cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cluster-cci          
-          service-name: service-cci
-          family: task-cci5
-          container-image-name-updates: "container=container-cci5,tag=latest"    
-          requires:
-            - aws-ecs/deploy-service-update
-            - aws-cli/setup
-            
-workflows:  
-  build-and-deploy-docker-image:    
+         cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cluster-cci
+         service-name: service-cci
+         family: task-cci5
+         container-image-name-updates: "container=container-cci5,tag=latest"
+         requires:
+           - aws-cli/setup
+
+workflows:
+  build-and-deploy-docker-image:
     jobs:
-      - build-push-docker-images      
-      
-      
+      - build-push-docker-images
+      - update-task-on-service
+
+
 ### End ###
-      
-      
+
+
           #requires:
           #  - job-name1
-          
+
           # Cluster_Name: cci-cluster3
           # Service_Name: cci-service3
           # Task_Name: cci-task1
           # Container_Name: cci-container1
           # Expose Port 3001
-      
-    
+
+
     ### End
