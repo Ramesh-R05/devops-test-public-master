@@ -33,7 +33,9 @@ workflows:
           requires:
           - aws-ecr/build-and-push-image                    
       
-      - update-task-revision      
+      - update-task-revision
+          requires:
+          - aws-ecs/deploy-service-update
       
 jobs:    
   job-name1:    
