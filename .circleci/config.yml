@@ -35,6 +35,8 @@ workflows:
           
       
       - update-task-revision
+        requires:
+        - aws-ecs/deploy-service-update
       
       
       
