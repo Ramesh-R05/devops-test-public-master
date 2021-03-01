@@ -27,16 +27,18 @@ workflows:
           service-name: service-cci
           family: task-cci5
           container-image-name-updates: "container=container-cci5,tag=latest"
+          force-new-deployment: true
+          verify-revision-is-deployed: true
           requires:
             - aws-ecr/build-and-push-image
       
-      - aws-ecs/update-task-definition:
+      #- aws-ecs/update-task-definition:
           #cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cluster-cci
           #service-name: service-cci
-          family: task-cci5
-          container-image-name-updates: "container=container-cci5,tag=latest"
-          requires:
-            - aws-ecs/deploy-service-update
+     #     family: task-cci5
+     #     container-image-name-updates: "container=container-cci5,tag=latest"
+     #     requires:
+     #       - aws-ecs/deploy-service-update
             
 ### End ###
 
