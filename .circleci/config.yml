@@ -5,27 +5,6 @@ version: 2.1
 orbs:   
   aws-ecr: circleci/aws-ecr@6.15.3
   aws-ecs: circleci/aws-ecs@2.0.0 
-  
- jobs:    
-  job-name1:    
-    machine: 
-      image: ubuntu-2004:202101-01
-    steps:
-      - run: echo "This Job Collects VM Info_Linux"
-      - run: pwd; id; uname -a;
-   
-   update-task-revision:
-      docker:
-        - image: 'cimg/python:3.9.1'
-      steps:
-        - aws-cli/setup:
-            aws-access-key-id: AWS_ACCESS_KEY_ID
-            aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-            region: AWS_DEFAULT_REGION          
-        - aws-ecs/update-service:
-            cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cluster-cci          
-            family: task-cci5
-            container-image-name-updates: "container=container-cci5,tag=latest"
 
 workflows:  
   build-and-deploy-docker-image:
@@ -53,7 +32,32 @@ workflows:
           requires:
           - aws-ecr/build-and-push-image          
           
-      - update-task-revision
+      
+      #- update-task-revision
+      
+      
+      
+      
+  jobs:    
+  job-name1:    
+    machine: 
+      image: ubuntu-2004:202101-01
+    steps:
+      - run: echo "This Job Collects VM Info_Linux"
+      - run: pwd; id; uname -a;
+   
+   update-task-revision:
+      docker:
+        - image: 'cimg/python:3.9.1'
+      steps:
+        - aws-cli/setup:
+            aws-access-key-id: AWS_ACCESS_KEY_ID
+            aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+            region: AWS_DEFAULT_REGION          
+        - aws-ecs/update-service:
+            cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cluster-cci          
+            family: task-cci5
+            container-image-name-updates: "container=container-cci5,tag=latest"
     
             
         
