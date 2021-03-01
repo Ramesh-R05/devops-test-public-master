@@ -9,6 +9,8 @@ orbs:
 
 jobs:
   build-push-docker-images:
+    machine:
+      image: ubuntu-2004:202101-01
     steps:
       - aws-ecr/build-and-push-image: # ECR Integration - Build and Push
           aws-access-key-id: AWS_ACCESS_KEY_ID
