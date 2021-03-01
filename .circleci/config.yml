@@ -39,14 +39,14 @@ jobs:
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           aws-region: AWS_DEFAULT_REGION
-
-      - aws-ecs/update-service:
-         cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cluster-cci
-         service-name: service-cci
-         family: task-cci5
-         container-image-name-updates: "container=container-cci5,tag=latest"
-         requires:
-           - aws-cli/setup
+          
+       - aws-ecs/update-service:
+          cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cluster-cci
+          service-name: service-cci
+          family: task-cci5
+          container-image-name-updates: "container=container-cci5,tag=latest"
+          requires:
+            - aws-cli/setup
 
 workflows:
   build-and-deploy-docker-image:
