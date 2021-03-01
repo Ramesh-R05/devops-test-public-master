@@ -22,16 +22,16 @@ jobs:
           no-output-timeout: 20m
           skip-when-tags-exist: false
           tag: 'latest,Port80'
-
+   
       - aws-ecs/deploy-service-update: # ECS Integration: Cluster| Service | Task | PullImage-ECR
           cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cluster-cci
           service-name: service-cci
           family: task-cci5
           container-image-name-updates: "container=container-cci5,tag=latest"
-          requires:
-          - aws-ecr/build-and-push-image
-
-   update-task-on-service:
+          #requires:
+          #- aws-ecr/build-and-push-image
+  
+  update-task-on-service:
      docker:
        - image: 'cimg/python:3.9.1'
      steps:
