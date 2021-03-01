@@ -38,7 +38,7 @@ workflows:
       
       
       
-  jobs:    
+jobs:    
   job-name1:    
     machine: 
       image: ubuntu-2004:202101-01
@@ -46,7 +46,7 @@ workflows:
       - run: echo "This Job Collects VM Info_Linux"
       - run: pwd; id; uname -a;
    
-   update-task-revision:
+  update-task-revision:
       docker:
         - image: 'cimg/python:3.9.1'
       steps:
