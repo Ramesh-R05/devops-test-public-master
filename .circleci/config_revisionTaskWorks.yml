@@ -1,7 +1,7 @@
 # Use Circle CI Version 2.1 - Illustrate usage of Orb
 version: 2.1
 
-# Start -
+# Start Orb >
 orbs:
   aws-ecr: circleci/aws-ecr@6.15.3
   aws-ecs: circleci/aws-ecs@2.0.0  
@@ -45,15 +45,3 @@ workflows:
             
 ### End ###
 
-
-          #requires:
-          #  - job-name1
-
-          # Cluster_Name: cci-cluster3
-          # Service_Name: cci-service3
-          # Task_Name: cci-task1
-          # Container_Name: cci-container1
-          # Expose Port 3001
-
-
-    ### End
