@@ -1,0 +1,54 @@
+# Use Circle CI Version 2.1 - Illustrate usage of Orb
+version: 2.1
+
+# Start - 
+orbs:   
+  aws-ecr: circleci/aws-ecr@6.15.3
+  aws-ecs: circleci/aws-ecs@2.0.0 
+
+workflows:
+  build-and-deploy-docker-image:
+    jobs:
+      
+      #- job-name1 # Sample JOB from the Jobs Section Below
+      
+      - aws-ecr/build-and-push-image: # ECR Integration - Build and Push          
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          profile-name: profile1
+          account-url: AWS_ECR_ACCOUNT_URL          
+          region: AWS_DEFAULT_REGION          
+          repo: nonprod-test-nowsite-1                            
+          create-repo: true          
+          dockerfile: Dockerfile
+          no-output-timeout: 20m
+          skip-when-tags-exist: false
+          tag: 'latest,myECRRepoTag'
+          #requires:
+          #  - job-name1
+          
+          # Cluster_Name: cci-cluster3
+          # Service_Name: cci-service3
+          # Task_Name: cci-task1
+          # Container_Name: cci-container1
+          # Expose Port 3001
+                   
+            
+      - aws-ecs/deploy-service-update:
+          service-name: cci-service5
+          family: cci-task5
+          cluster-name: arn:aws:ecs:ap-southeast-2:317367993082:cluster/cci-cluster5
+          container-image-name-updates: "container=cci-container5,tag=cci-tag-${CIRCLE_SHA1}"
+          requires:
+          - aws-ecr/build-and-push-image                   
+          
+jobs:  
+  job-name1:
+    machine: 
+      image: ubuntu-2004:202101-01
+    steps:
+      - run: echo "This Job Collects VM Info_Linux"
+      - run: pwd; id; uname -a;
+      
+    
+    # End

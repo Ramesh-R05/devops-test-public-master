@@ -1,0 +1,50 @@
+# Use Circle CI Version 2.1 - Illustrate usage of Orb
+version: 2.1
+
+# Start - 
+orbs:   
+  aws-ecr: circleci/aws-ecr@6.15.3
+  aws-ecs: circleci/aws-ecs@2.0.0
+
+
+workflows:
+  build-and-deploy-docker-image:
+    jobs:
+      - job-name1 
+      - job-name2          
+
+jobs:  
+  job-name1:
+    machine: 
+      image: ubuntu-2004:202101-01
+    steps:
+      - run: echo "This is Job-Job-Name1"      
+      - run: uname -a      
+      - run: aws --version --output text
+      # AssumeRole - ASR
+      - run: aws sts assume-role --role-arn arn:aws:iam::317367993082:role/bm-super --role-session-name ecr-access-x1 --output text > /tmp/test
+      - run: cat /tmp/test      
+      - run: awk 'NR==2 {print $2}' /tmp/test >>  /tmp/t1
+      - run: awk 'NR==2 {print $4}' /tmp/test >>  /tmp/t2      
+      - run:
+          name: Set ENV Variable
+          command: |
+            ls -ltr /tmp/
+            echo 'export assumerole_access_key=$(cat /tmp/t1)' >> $BASH_ENV
+            echo 'export assumerole_secret_id=$(cat /tmp/t2)'  >> $BASH_ENV
+            source $BASH_ENV
+            echo "ENV VAR SET"
+      - run: env | grep -i assume*
+      - run: pwd
+      
+      
+  job-name2:
+    machine: 
+      image:
+    steps:
+       - run: echo "This is Job-Job-Name2"
+      
+  
+      
+    
+    # End
